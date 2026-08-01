@@ -31,3 +31,6 @@ weights_and_biases = {
     "output_weights": model[2].weight.detach().numpy().tolist(),
     "output_bias":model[2].bias.detach().numpy().tolist()
 }
+
+with open('weights.json', 'w') as f:
+    json.dump(weights_and_biases, f)
