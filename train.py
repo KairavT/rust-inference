@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from sklearn.datasets import load_iris
+import json
 
 X, y = load_iris(return_X_y=True)
 X = torch.tensor(X, dtype=torch.float32)
@@ -23,3 +24,10 @@ for i in range(1001):
     optimizer.zero_grad()
     if i % 100 == 0:
         print(f'Iteration {i}, loss = {loss:.5f}')
+    
+weights_and_biases = {
+    "hidden_weights": model[0].weight.detach().numpy().tolist(),
+    "hidden_bias":model[0].bias.detach().numpy().tolist(),
+    "output_weights": model[2].weight.detach().numpy().tolist(),
+    "output_bias":model[2].bias.detach().numpy().tolist()
+}
