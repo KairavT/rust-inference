@@ -48,5 +48,5 @@ values_to_preds = {
     "predictions": outputs_preds.tolist()
 }
 
-with open('test_samples', 'w') as f:
+with open('test_samples.json', 'w') as f:
     json.dump(values_to_preds, f)
