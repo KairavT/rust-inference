@@ -28,5 +28,6 @@ fn main() {
     let weights: Weights = serde_json::from_str(&weights_json)
     .expect("could not parse file");
 
-    println!("{:?}", weights.hidden_bias);
+    let inputs_test = vec![4.900000095367432, 3.0, 1.399999976158142, 0.20000000298023224];
+    println!("{:?}", hidden_layer(&inputs_test, &weights.hidden_weights, &weights.hidden_bias));
 } 
