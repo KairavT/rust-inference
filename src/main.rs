@@ -34,4 +34,13 @@ fn main() {
     let hidden_test = hidden_layer(&inputs_test, &weights.hidden_weights, &weights.hidden_bias, true);
     let logits = hidden_layer(&hidden_test, &weights.output_weights, &weights.output_bias, false);
     println!("{:?}", logits);
+    let mut best_index = 0;
+    let mut best_value = logits[0];
+    for i in 1..logits.len(){
+        if logits[i] > best_value{
+            best_index = i;
+            best_value = logits[i];
+        }
+    }
+    println!("{}",best_index)
 } 
