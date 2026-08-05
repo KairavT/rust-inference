@@ -8,15 +8,17 @@ struct Weights{
     output_bias: Vec<f64>
 }
 
-fn hidden_layer(input: &Vec<f64>, weights: &Vec<Vec<f64>>, bias: &Vec<f64>) -> Vec<f64>{
+fn hidden_layer(input: &Vec<f64>, weights: &Vec<Vec<f64>>, bias: &Vec<f64>, apply_relu: bool) -> Vec<f64>{
     let mut outputs: Vec<f64> = Vec::new();
     for i in 0..weights.len(){
         let mut weighted_sum = bias[i];
         for j in 0..input.len(){
             weighted_sum += weights[i][j] * input[j];
         }
-        let activated = weighted_sum.max(0.0);
-        outputs.push(activated);
+        if apply_relu{
+            weighted_sum = weighted_sum.max(0.0);
+        }
+        outputs.push(weighted_sum);
     }
     outputs
 }
@@ -29,5 +31,5 @@ fn main() {
     .expect("could not parse file");
 
     let inputs_test = vec![4.900000095367432, 3.0, 1.399999976158142, 0.20000000298023224];
-    println!("{:?}", hidden_layer(&inputs_test, &weights.hidden_weights, &weights.hidden_bias));
+    println!("{:?}", hidden_layer(&inputs_test, &weights.hidden_weights, &weights.hidden_bias, true));
 } 
