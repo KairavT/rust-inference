@@ -1,6 +1,12 @@
 use serde::Deserialize;
 
 #[derive(Deserialize)]
+struct TestSamples{
+    inputs: Vec<Vec<f64>>,
+    predictions: Vec<usize>
+}
+
+#[derive(Deserialize)]
 struct Weights{
     hidden_weights: Vec<Vec<f64>>,
     hidden_bias: Vec<f64>,
@@ -48,6 +54,14 @@ fn main() {
 
     let weights: Weights = serde_json::from_str(&weights_json)
     .expect("could not parse file");
+
+    let samples_json = std::fs::read_to_string("test_samples.json")
+    .expect("could not read file");
+
+    let samples: TestSamples = serde_json::from_str(&samples_json)
+    .expect("could not parse file");
+
+    println!("{:?}", samples.predictions);
     
     let predict_test = predict(&vec![4.900000095367432, 3.0, 1.399999976158142, 0.20000000298023224], &weights);
     println!("{}", predict_test);
