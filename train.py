@@ -35,16 +35,13 @@ weights_and_biases = {
 with open('weights.json', 'w') as f:
     json.dump(weights_and_biases, f)
 
-iris_row_indices = [1, 50, 100, 2, 51]
-indices_values = X[iris_row_indices]
 with torch.no_grad():
-    values_outputs = model(indices_values)
+    values_outputs = model(X)
 
 outputs_preds = values_outputs.argmax(dim=1)
-print(outputs_preds)
 
 values_to_preds = {
-    "inputs":indices_values.tolist(),
+    "inputs":X.tolist(),
     "predictions": outputs_preds.tolist()
 }
 
