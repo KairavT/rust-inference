@@ -64,8 +64,9 @@ fn main() {
     for i in 0..samples.inputs.len(){
         let cur_input = &samples.inputs[i];
         let cur_prediction = predict(cur_input, &weights);
-        println!("Prediction {}: {:?}, Sample Prediction: {:?}",
-                i, cur_prediction, samples.predictions[i]);
+        let matching = cur_prediction == samples.predictions[i];
+        println!("Prediction {}: {:?}, Sample Prediction: {:?}, Equal: {}",
+                i, cur_prediction, samples.predictions[i], matching);
     }
     
 } 
