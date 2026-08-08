@@ -70,7 +70,7 @@ fn main() {
             match_count += 1;
         }
         println!("Prediction {}: {:?}, Sample Prediction: {:?}, Equal: {}",
-                i, cur_prediction, samples.predictions[i], matching);
+                i + 1, cur_prediction, samples.predictions[i], matching);
     }
     println!("{} matching predictions", match_count)
 } 
