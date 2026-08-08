@@ -60,13 +60,17 @@ fn main() {
 
     let samples: TestSamples = serde_json::from_str(&samples_json)
     .expect("could not parse file");
-
+    
+    let mut match_count = 0;  
     for i in 0..samples.inputs.len(){
         let cur_input = &samples.inputs[i];
         let cur_prediction = predict(cur_input, &weights);
         let matching = cur_prediction == samples.predictions[i];
+        if matching{
+            match_count += 1;
+        }
         println!("Prediction {}: {:?}, Sample Prediction: {:?}, Equal: {}",
                 i, cur_prediction, samples.predictions[i], matching);
     }
-    
+    println!("{} matching predictions", match_count)
 } 
