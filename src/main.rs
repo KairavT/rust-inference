@@ -61,8 +61,11 @@ fn main() {
     let samples: TestSamples = serde_json::from_str(&samples_json)
     .expect("could not parse file");
 
-    println!("{:?}", samples.predictions);
+    for i in 0..samples.inputs.len(){
+        let cur_input = &samples.inputs[i];
+        let cur_prediction = predict(cur_input, &weights);
+        println!("Prediction {}: {:?}, Sample Prediction: {:?}",
+                i, cur_prediction, samples.predictions[i]);
+    }
     
-    let predict_test = predict(&vec![4.900000095367432, 3.0, 1.399999976158142, 0.20000000298023224], &weights);
-    println!("{}", predict_test);
 } 
